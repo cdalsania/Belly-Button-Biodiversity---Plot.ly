@@ -206,3 +206,39 @@ function displayBubblePlot(dropDownValue) {
     //filter the data based on user selected drop down value
 
     var filteredSample = samples.filter(row => parseInt(row.id) === parseInt(dropDownValue))[0];
+
+    //fetch the fetch values
+    var sample = filteredSample.sample_values;
+    var otuLabel = filteredSample.otu_labels;
+    var otuId = filteredSample.otu_ids;
+    var opacity = sample.map(value => 0.75);
+
+    var bubbleTrace = {
+        x: otuId,
+        y: sample,
+        marker: {
+            size: sample,
+            color: otuId,
+            opacity: opacity,
+            colorscale: "Earth"
+        },
+        text: otuLabel,
+        mode: 'markers'
+    }
+
+    var bubbleData = [bubbleTrace];
+
+    var bubbleLayout = {
+        showlegend: false,
+        xaxis: {
+            title: "OTU IDs"
+        },
+        yaxis: {
+            title: "No. of Samples"
+        },
+        title: "All OTUs for " + dropDownValue,
+    }
+
+    Plotly.newPlot('bubble', bubbleData, bubbleLayout);
+
+}
