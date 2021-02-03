@@ -62,3 +62,36 @@ function displayBarPlot(dropDownValue) {
 
     //filter the data based on user selected drop down value
     var filteredSample = samples.filter(row => parseInt(row.id) === parseInt(dropDownValue))[0];
+
+    //fetch the top 10 values
+    var sample = filteredSample.sample_values.slice(0, 10);
+    var otuLabel = filteredSample.otu_labels.slice(0, 10);
+    var otuId = filteredSample.otu_ids.slice(0, 10);
+
+    var reversedSample = sample.reverse();
+    var reversedOtuLabel = otuLabel.reverse();
+    var reversedOtuId = otuId.reverse().map(id => 'OTU ' + id);
+
+    var barTrace = {
+        x: reversedSample,
+        y: reversedOtuId,
+        text: reversedOtuLabel,
+        type: 'bar',
+        orientation: 'h'
+    };
+
+    var barData = [barTrace];
+
+    var barLayout = {
+        showlegend: false,
+        xaxis: {
+            title: "No. of Samples"
+        },
+        yaxis: {
+            title: "OTU Ids"
+        },
+        title: "Top 10 OTUs for " + dropDownValue,
+    }
+
+    Plotly.newPlot('bar', barData, barLayout);
+}
