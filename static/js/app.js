@@ -11,3 +11,7 @@ d3.json('static/data/samples.json').then(function(data) {
 
             //populate Test Subject ID No. dropdown
             var dropDown = d3.select("#selDataset");
+
+            names.forEach(name => {
+                dropDown.append('option').property('value', name).text(name);
+            });
