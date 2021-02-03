@@ -117,3 +117,82 @@ function gaugePointer(value) {
 }
 
 function displayGuagePlot(dropDownValue) {
+
+    // Update the Title for the chart with the user selected ID
+    var guageTitle = d3.select('#gauge-heading-1');
+    guageTitle.html(`<strong>Wash Frequency for Test Subject ID ${dropDownValue}</strong>`)
+
+    var filteredMetaData = metadata.filter(row => parseInt(row.id) === parseInt(dropDownValue))[0];
+    washFrequency = filteredMetaData.wfreq;
+
+    var level = washFrequency * 180 / 9;
+
+    var needleHeadTrace = {
+        type: 'scatter',
+        x: [0],
+        y: [0],
+        marker: { size: 18, color: '850000' },
+        showlegend: false,
+        text: washFrequency,
+        name: 'Wash Frequency',
+        hoverinfo: 'text+name'
+    }
+
+    var gaugeTrace = {
+        type: 'pie',
+        hole: .5,
+        values: [50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50],
+        text: ['8-9', '7-8', '6-7', '5-6', '4-5', '3-4', '2-3', '1-2', '0-1', ' '],
+        rotation: 90,
+        textposition: 'inside',
+        textinfo: 'text',
+        labels: ['8-9', '7-8', '6-7', '5-6', '4-5', '3-4', '2-3', '1-2', '0-1', ' '],
+        hoverinfo: 'label',
+        showlegend: false,
+        marker: {
+            colors: [
+                '#004529',
+                '#006837',
+                '#238443',
+                '#41ab5d',
+                '#78c679',
+                '#addd8e',
+                '#d9f0a3',
+                '#f7fcb9',
+                '#ffffe5',
+                '#ffffff'
+            ]
+        }
+    }
+
+    var gaugeData = [needleHeadTrace, gaugeTrace];
+
+    var gaugeLayout = {
+        shapes: [{
+            type: 'path',
+            path: gaugePointer(level),
+            fillcolor: '850000',
+            line: {
+                color: '850000'
+            }
+        }],
+        autosize: true,
+        xaxis: {
+            zeroline: false,
+            showticklabels: false,
+            showgrid: false,
+            range: [-1, 1]
+        },
+        yaxis: {
+            zeroline: false,
+            showticklabels: false,
+            showgrid: false,
+            range: [-1, 1]
+        },
+        margin: {
+            l: 0,
+            r: 0,
+            t: 0,
+            b: 0
+        }
+    }
