@@ -168,31 +168,37 @@ function displayGuagePlot(dropDownValue) {
     var gaugeData = [needleHeadTrace, gaugeTrace];
 
     var gaugeLayout = {
-        shapes: [{
-            type: 'path',
-            path: gaugePointer(level),
-            fillcolor: '850000',
-            line: {
-                color: '850000'
+            shapes: [{
+                type: 'path',
+                path: gaugePointer(level),
+                fillcolor: '850000',
+                line: {
+                    color: '850000'
+                }
+            }],
+            autosize: true,
+            xaxis: {
+                zeroline: false,
+                showticklabels: false,
+                showgrid: false,
+                range: [-1, 1]
+            },
+            yaxis: {
+                zeroline: false,
+                showticklabels: false,
+                showgrid: false,
+                range: [-1, 1]
+            },
+            margin: {
+                l: 0,
+                r: 0,
+                t: 0,
+                b: 0
             }
-        }],
-        autosize: true,
-        xaxis: {
-            zeroline: false,
-            showticklabels: false,
-            showgrid: false,
-            range: [-1, 1]
-        },
-        yaxis: {
-            zeroline: false,
-            showticklabels: false,
-            showgrid: false,
-            range: [-1, 1]
-        },
-        margin: {
-            l: 0,
-            r: 0,
-            t: 0,
-            b: 0
         }
-    }
+        // Render the gauge chart to the div tag with id "gauge"
+    Plotly.newPlot('gauge', gaugeData, gaugeLayout);
+}
+
+
+function displayBubblePlot(dropDownValue) {
