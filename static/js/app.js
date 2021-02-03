@@ -32,3 +32,6 @@ function optionChanged(value) {
 
     //display bar plot for user selected dropdown value
     displayBarPlot(value);
+
+    //display guage plot for user selected dropdown value
+    displayGuagePlot(value);
