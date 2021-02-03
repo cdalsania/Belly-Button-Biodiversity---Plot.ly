@@ -95,3 +95,12 @@ function displayBarPlot(dropDownValue) {
 
     Plotly.newPlot('bar', barData, barLayout);
 }
+
+// Function to calc gauge needle points
+function gaugePointer(value) {
+
+    var degrees = 180 - value;
+    var radius = .5;
+    var radians = degrees * Math.PI / 180;
+    var x = radius * Math.cos(radians);
+    var y = radius * Math.sin(radians);
