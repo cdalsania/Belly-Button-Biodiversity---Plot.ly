@@ -202,3 +202,7 @@ function displayGuagePlot(dropDownValue) {
 
 
 function displayBubblePlot(dropDownValue) {
+
+    //filter the data based on user selected drop down value
+
+    var filteredSample = samples.filter(row => parseInt(row.id) === parseInt(dropDownValue))[0];
