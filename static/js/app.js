@@ -29,3 +29,6 @@ function optionChanged(value) {
 
     //display demographic info
     displayDemograpicInfo(value);
+
+    //display bar plot for user selected dropdown value
+    displayBarPlot(value);
