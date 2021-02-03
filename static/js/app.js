@@ -43,3 +43,19 @@ function optionChanged(value) {
 function displayDemograpicInfo(dropDownValue) {
 
     var demographicDivTag = d3.select('#sample-metadata');
+
+    //clear out the div tag
+    demographicDivTag.html("");
+
+    var tableTag = demographicDivTag.append("table").classed("table table-striped", true);
+
+    var filteredMetaData = metadata.filter(row => parseInt(row.id) === parseInt(dropDownValue))[0];
+
+    Object.entries(filteredMetaData).forEach(([key, value]) => {
+        var tableRow = tableTag.append('tr');
+        tableRow.append('td').text(key + ': ');
+        tableRow.append('td').text(value).style('word-break', 'break-word');
+    });
+}
+
+function displayBarPlot(dropDownValue) {
