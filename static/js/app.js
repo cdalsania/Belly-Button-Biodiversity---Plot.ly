@@ -26,3 +26,6 @@ d3.json('static/data/samples.json').then(function(data) {
 });
 
 function optionChanged(value) {
+
+    //display demographic info
+    displayDemograpicInfo(value);
