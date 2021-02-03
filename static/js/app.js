@@ -35,3 +35,11 @@ function optionChanged(value) {
 
     //display guage plot for user selected dropdown value
     displayGuagePlot(value);
+
+    //display bubble plot for user selected dropdown value
+    displayBubblePlot(value);
+};
+
+function displayDemograpicInfo(dropDownValue) {
+
+    var demographicDivTag = d3.select('#sample-metadata');
